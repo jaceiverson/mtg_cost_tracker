@@ -1,0 +1,7 @@
+[project]
+name="jace-daily-notification-systems"
+version="0.0.1"
+
+
+[project.scripts]
+magic="mtg_product.tcg:main"
