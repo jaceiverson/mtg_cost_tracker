@@ -42,6 +42,10 @@ def read_in_products() -> dict:
     """
     Reads in the products from the products.json file
     found in the mtg_product directory
+
+    Returns
+    ------
+    dict: The products read from the JSON file
     """
     with open("mtg_product/products.json", "r") as f:
         return json.load(f)
@@ -56,6 +60,10 @@ def read_products_from_outputs(product_id: str, date: str) -> dict:
     ------
     product_id: str: The ID of the product to read data for
     date: str: The date of the product data to read formatted as: dt.date.today().isoformat()
+
+    Returns
+    ------
+    dict: a past API response for a given day read from the JSON file or empty dict
     """
     file_path = f"outputs/{product_id}/{date}.json"
     if not os.path.exists(file_path):
@@ -74,6 +82,10 @@ def read_history_from_outputs(product_id: str, date: str) -> dict:
     ------
     product_id: str: The ID of the product to read data for
     date: str: The date of the product data to read formatted as: dt.date.today().isoformat()
+
+    Returns
+    ------
+    dict: a past historical API response for a given day read from the JSON file or empty dict
     """
     file_path = f"outputs/{product_id}/history/{date}.json"
     if not os.path.exists(file_path):
@@ -83,7 +95,7 @@ def read_history_from_outputs(product_id: str, date: str) -> dict:
         return json.load(f)
 
 
-def save_products(product_id: str, product_data: dict):
+def save_products(product_id: str, product_data: dict) -> None:
     """
     Given a product_id and an API response, save the data to the outputs directory
 
@@ -98,7 +110,7 @@ def save_products(product_id: str, product_data: dict):
     print(f"[green]Saved product data: {file_path}[/green]")
 
 
-def save_history(product_id: str, product_data: dict):
+def save_history(product_id: str, product_data: dict) -> None:
     """
     Given a product_id and an API response, save the historical data to the outputs directory
 
@@ -283,7 +295,7 @@ def build_message(todays_data: dict, historical_data: dict) -> str:
     return f"{product_name}\n• C: ${price_string}\n• T: {transaction_string}\n{product_url}\n\n"
 
 
-def process_products(pull_fresh: bool):
+def process_products(pull_fresh: bool) -> None:
     """
     main process for our pipeline. Follows these steps
 
@@ -330,7 +342,7 @@ def process_products(pull_fresh: bool):
     send_whats_app(main_msg)
 
 
-def main():
+def main() -> None:
     """
     script entry point. Accepts 1 argument
 
