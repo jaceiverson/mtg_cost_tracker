@@ -80,6 +80,8 @@ def test_determine_change(inputs, expected):
         (0.4, 5),
         (0.5, 5),
         (1, 5),
+        (-0.005, 1),
+        (0.005, 1),
     ],
 )
 def test_get_number_of_arrows(input_value, expected):
